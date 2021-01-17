@@ -35,7 +35,7 @@ class CustomController : public XboxController {
      * 
      * @param input The boolean to set the square scaling to.
      */
-    void set_square_scale(bool input) {
+    void setSquareScale(bool input) {
       is_square = input;
     }
 
@@ -45,7 +45,7 @@ class CustomController : public XboxController {
      * @param value The value to check.
      * @return A boolean of whether the controller axis is in the deadzone.
      */
-    bool in_deadzone(double value) {
+    bool inDeadzone(double value) {
       return value < deadzone && value > -deadzone; //If the value is inside our deadzone, return true.
     }
 
@@ -57,7 +57,7 @@ class CustomController : public XboxController {
      */
     double GetRawAxis(int axis) {
         double value = GenericHID::GetRawAxis(axis);
-        if(in_deadzone(value)) { //If the value is in the deadzone, return 0.
+        if(inDeadzone(value)) { //If the value is in the deadzone, return 0.
             return 0;
         }
         if(is_square) {
@@ -73,6 +73,50 @@ class CustomController : public XboxController {
         }
     }
     
+    bool isClimberUp() {
+      int value = GenericHID::GetPOV();
+      return value == 315 || value == 0 || value == 45;
+    }
+    
+    bool isClimberDown() {
+      int value = GenericHID::GetPOV();
+      return value == 180;
+    }
+    
+    bool isClimberLeft() {
+      int value = GenericHID::GetPOV();
+      return value == 225 || value == 270;
+    }
+    
+    bool isClimberRight() {
+      int value = GenericHID::GetPOV();
+      return value == 90 || value == 135;
+    }
+    
+    float GetLeftDriveTrain() {
+      return GetRawAxis(1);
+    }
+
+    float GetRightDriveTrain() {
+      return GetRawAxis(5);
+    }
+
+    bool GetAutoShootPressed() {
+      return XboxController::GetAButtonPressed();
+    }
+
+    bool GetAutoPickupPressed() {
+      return XboxController::GetBButtonPressed();
+    }
+
+    bool GetShootButtonPressed() {
+      return XboxController::GetXButtonPressed();
+    }
+
+    bool GetIntakeButtonPressed() {
+      return XboxController::GetYButtonPressed();
+    }
+
   private:
     bool is_square;
     float deadzone;

@@ -12,11 +12,10 @@
 #include <frc/TimedRobot.h>
 #include <frc/WPILib.h>
 #include <frc/smartdashboard/SendableChooser.h>
-#include "rev/CANSparkMax.h"
 
-//Custom classes
+//our custom controller
 #include "CustomController.h"
-#include "Limelight.h"
+#include "ports.h"
 
 using namespace frc;
 
@@ -24,8 +23,6 @@ class Robot : public frc::TimedRobot {
  public:
   CustomController xbox;
   RobotDrive driveTrain;
-  Limelight limelight;
-  bool square;
   void RobotInit() override;
   void RobotPeriodic() override;
   void AutonomousInit() override;
@@ -33,8 +30,8 @@ class Robot : public frc::TimedRobot {
   void TeleopInit() override;
   void TeleopPeriodic() override;
   void TestPeriodic() override;
-  Robot() : xbox(0), driveTrain(0, 1), limelight() {
-    square = false;
+  Robot() : xbox(Ports::XBOX_DRIVER), driveTrain(Ports::LEFT_DRIVE_TRAIN, Ports::RIGHT_DRIVE_TRAIN) {
+
   }
  private:
   frc::SendableChooser<std::string> m_chooser;
