@@ -1,0 +1,10 @@
+settings.gradle
+gradlew
+gradlew.bat
+build.gradle
+vendordeps/**
+gradle/**
+build/**
+.wpilib/**
+.vscode/**
+.gradle/**
