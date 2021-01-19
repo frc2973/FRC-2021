@@ -63,7 +63,25 @@ void Robot::AutonomousPeriodic() {
 void Robot::TeleopInit() {}
 
 void Robot::TeleopPeriodic() {
-  driveTrain.TankDrive(-xbox.GetLeftDriveTrain(), -xbox.GetRightDriveTrain());
+  //Drive the robot
+  xbox.setSquareScale(square);
+  if (xbox.GetAButton()) {
+    square = !square;
+  }
+  driveTrain.TankDrive(-xbox.GetRawAxis(1), -xbox.GetRawAxis(5));
+
+  //Activate Limelight tracking
+  if (xbox.GetYButton()) {
+    while (xbox.GetYButton()) {}
+    limelight.set("ledMode", 3); //LED on
+    if (limelight.get("tv") == 1) { //If target detected
+      float maxAngle = 29.8;
+      while(limelight.get("tx") != 0 && !xbox.GetYButton()) {
+        driveTrain.ArcadeDrive(0, -limelight.get("tx") / maxAngle);
+      }
+    }
+    limelight.set("ledMode", 1); //LED off
+  }
 }
 
 void Robot::TestPeriodic() {}
