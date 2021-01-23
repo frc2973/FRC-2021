@@ -16,6 +16,8 @@ void Robot::RobotInit() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+
+  frc::SmartDashboard::PutNumber("Shooter", 0);
 }
 
 /**
@@ -64,7 +66,7 @@ void Robot::TeleopInit() {}
 
 void Robot::TeleopPeriodic() {
   driveTrain.TankDrive(-xbox.GetLeftDriveTrain(), -xbox.GetRightDriveTrain());
-  shooter.Set(-xbox.GetRawAxis(3));
+  shooter.Set(frc::SmartDashboard::GetNumber("Shooter", 0));
 }
 
 void Robot::TestPeriodic() {}
