@@ -67,4 +67,6 @@ namespace Ports {
 
     const PWM LEFT_DRIVE_TRAIN = PWM::PWM_0;
     const PWM RIGHT_DRIVE_TRAIN = PWM::PWM_1;
+
+    const CAN SHOOTER = CAN::CAN_9;
 }
