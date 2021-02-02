@@ -26,6 +26,9 @@ class Robot : public frc::TimedRobot {
   CustomController xbox;
   RobotDrive driveTrain;
   CANSparkMax shooter;
+  VictorSP elevator;
+  VictorSP transfer;
+  VictorSP intake;
   void RobotInit() override;
   void RobotPeriodic() override;
   void AutonomousInit() override;
@@ -35,7 +38,10 @@ class Robot : public frc::TimedRobot {
   void TestPeriodic() override;
   Robot() : xbox(Ports::XBOX_DRIVER),
     driveTrain(Ports::LEFT_DRIVE_TRAIN, Ports::RIGHT_DRIVE_TRAIN),
-    shooter(Ports::SHOOTER, rev::CANSparkMax::MotorType::kBrushless) {
+    shooter(Ports::SHOOTER, rev::CANSparkMax::MotorType::kBrushless),
+    elevator(Ports::ELEVATOR),
+    transfer(Ports::TRANSFER),
+    intake(Ports::INTAKE) {
 
   }
  private:
