@@ -77,7 +77,7 @@ void Robot::TeleopPeriodic() {
     if (limelight.get("tv") == 1) { //If target detected
       float maxAngle = 29.8;
       while(limelight.get("tx") != 0 && !xbox.GetYButton()) {
-        driveTrain.ArcadeDrive(0, -limelight.get("tx") / maxAngle * 127);
+        driveTrain.ArcadeDrive(0, -limelight.get("tx") / maxAngle);
       }
     }
     limelight.set("ledMode", 1); //LED off
