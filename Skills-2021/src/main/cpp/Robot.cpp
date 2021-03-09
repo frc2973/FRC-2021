@@ -16,6 +16,9 @@ void Robot::RobotInit() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+
+  frc::SmartDashboard::PutNumber("Rotations", 0);
+  frc::SmartDashboard::PutNumber("Reading", 0);
 }
 
 /**
@@ -50,6 +53,20 @@ void Robot::AutonomousInit() {
   } else {
     // Default Auto goes here
   }
+
+  //float num = frc::SmartDashboard::GetNumber("Rotations", 0);
+  //travel(0.25, 6);
+  /*rev::CANEncoder encoder = left_front.GetEncoder();
+    encoder.SetPosition(0);
+    while(encoder.GetPosition() < 6.0) {
+        left_front.Set(0.25);
+        left_back.Set(0.25);
+        //TankDrive(speed, speed);
+        frc::SmartDashboard::PutNumber("Reading", encoder.GetPosition());
+    }
+    //TankDrive(0.001, 0.001);
+    left_front.Set(0.001);
+    left_back.Set(0.001);*/
 }
 
 void Robot::AutonomousPeriodic() {
@@ -63,7 +80,12 @@ void Robot::AutonomousPeriodic() {
 void Robot::TeleopInit() {}
 
 void Robot::TeleopPeriodic() {
-  driveTrain.TankDrive(-xbox.GetLeftDriveTrain(), -xbox.GetRightDriveTrain());
+  TankDrive(-xbox.GetLeftDriveTrain(), -xbox.GetRightDriveTrain());
+  rev::CANEncoder encoder = left_front.GetEncoder();
+  frc::SmartDashboard::PutNumber("Reading", encoder.GetPosition());
+  if(xbox.GetAButton()) {
+    encoder.SetPosition(0);
+  }
 }
 
 void Robot::TestPeriodic() {}
