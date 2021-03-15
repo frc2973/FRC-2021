@@ -8,7 +8,7 @@ void Robot::TankDrive(float left_value, float right_value) {
 }
 
 void Robot::travel(float speed, float value) {
-    rev::CANEncoder encoder = left_front.GetEncoder();
+    //rev::CANEncoder encoder = left_front.GetEncoder();
     encoder.SetPosition(0);
     while(encoder.GetPosition() < value) {
         left_front.Set(speed);
