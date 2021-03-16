@@ -12,6 +12,7 @@
 #include <frc/TimedRobot.h>
 #include <frc/WPILib.h>
 #include <frc/smartdashboard/SendableChooser.h>
+#include <rev/CANSparkMax.h>
 
 #include <rev/CANSparkMax.h>
 
@@ -29,7 +30,11 @@ class Robot : public frc::TimedRobot {
   CANSparkMax left_back;
   CANSparkMax right_front;
   CANSparkMax right_back;
+  CANSparkMax shooter;
   CANEncoder encoder = left_front.GetEncoder();
+  VictorSP elevator;
+  VictorSP transfer;
+  VictorSP intake;
   void TankDrive(float left_value, float right_value);
   void RobotInit() override;
   void RobotPeriodic() override;
@@ -43,7 +48,11 @@ class Robot : public frc::TimedRobot {
   left_front(Ports::LEFT_FRONT, CANSparkMax::MotorType::kBrushless), 
   left_back(Ports::LEFT_BACK, CANSparkMax::MotorType::kBrushless), 
   right_front(Ports::RIGHT_FRONT, CANSparkMax::MotorType::kBrushless), 
-  right_back(Ports::RIGHT_BACK, CANSparkMax::MotorType::kBrushless) {
+  right_back(Ports::RIGHT_BACK, CANSparkMax::MotorType::kBrushless),
+  shooter(Ports::SHOOTER, CANSparkMax::MotorType::kBrushless),
+  elevator(Ports::ELEVATOR),
+  transfer(Ports::TRANSFER),
+  intake(Ports::INTAKE) {
   }
  private:
   frc::SendableChooser<std::string> m_chooser;
