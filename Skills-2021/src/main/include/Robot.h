@@ -31,7 +31,6 @@ class Robot : public frc::TimedRobot {
   CANSparkMax right_back;
   CANEncoder encoder = left_front.GetEncoder();
   void TankDrive(float left_value, float right_value);
-  void travel(float speed, float value);
   void RobotInit() override;
   void RobotPeriodic() override;
   void AutonomousInit() override;
