@@ -16,9 +16,6 @@ void Robot::RobotInit() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
-
-  frc::SmartDashboard::PutNumber("Rotations", 0);
-  //frc::SmartDashboard::PutNumber("Reading", 0);
 }
 
 /**
@@ -53,9 +50,6 @@ void Robot::AutonomousInit() {
   } else {
     // Default Auto goes here
   }
-
-  float num = frc::SmartDashboard::GetNumber("Rotations", 0);
-  travel(0.25, num);
 }
 
 void Robot::AutonomousPeriodic() {
@@ -70,11 +64,6 @@ void Robot::TeleopInit() {}
 
 void Robot::TeleopPeriodic() {
   TankDrive(-xbox.GetLeftDriveTrain(), -xbox.GetRightDriveTrain());
-  //rev::CANEncoder encoder = left_front.GetEncoder();
-  frc::SmartDashboard::PutNumber("Reading", encoder.GetPosition());
-  if(xbox.GetAButton()) {
-    encoder.SetPosition(0);
-  }
 }
 
 void Robot::TestPeriodic() {}
