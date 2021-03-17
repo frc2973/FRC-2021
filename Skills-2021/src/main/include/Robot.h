@@ -12,7 +12,6 @@
 #include <frc/TimedRobot.h>
 #include <frc/WPILib.h>
 #include <frc/smartdashboard/SendableChooser.h>
-#include <rev/CANSparkMax.h>
 
 #include <rev/CANSparkMax.h>
 
