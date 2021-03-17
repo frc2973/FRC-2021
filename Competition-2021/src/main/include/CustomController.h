@@ -26,7 +26,7 @@ class CustomController : public XboxController {
      *             into (0-5).
      */
     explicit CustomController(int port) : XboxController(port) {
-       is_square = true;
+       is_square = false;
        deadzone = 0.1;
     };
     

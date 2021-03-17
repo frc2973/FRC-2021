@@ -63,6 +63,7 @@ void Robot::AutonomousPeriodic() {
 void Robot::TeleopInit() {}
 
 void Robot::TeleopPeriodic() {
+<<<<<<< HEAD
   //Drive the robot
   xbox.set_square_scale(square);
   if (xbox.GetAButton()) {
@@ -82,6 +83,10 @@ void Robot::TeleopPeriodic() {
     }
     limelight.set("ledMode", 1); //LED off
   }
+=======
+  driveTrain.TankDrive(-xbox.GetLeftDriveTrain(), -xbox.GetRightDriveTrain());
+  shooter.Set(-xbox.GetRawAxis(3));
+>>>>>>> master
 }
 
 void Robot::TestPeriodic() {}

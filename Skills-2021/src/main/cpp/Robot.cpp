@@ -16,6 +16,11 @@ void Robot::RobotInit() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+
+  frc::SmartDashboard::PutNumber("Shooter", 0);
+  frc::SmartDashboard::PutNumber("Elevator", 0);
+  frc::SmartDashboard::PutNumber("Transfer", 0);
+  frc::SmartDashboard::PutNumber("Intake", 0);
 }
 
 /**
@@ -82,6 +87,11 @@ void Robot::TeleopPeriodic() {
     }
     limelight.set("ledMode", 1); //LED off
   }
+  TankDrive(-xbox.GetLeftDriveTrain(), -xbox.GetRightDriveTrain());
+  shooter.Set(frc::SmartDashboard::GetNumber("Shooter", 0));
+  elevator.Set(frc::SmartDashboard::GetNumber("Elevator", 0));
+  transfer.Set(frc::SmartDashboard::GetNumber("Transfer", 0));
+  intake.Set(frc::SmartDashboard::GetNumber("Intake", 0));
 }
 
 void Robot::TestPeriodic() {}

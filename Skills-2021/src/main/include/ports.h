@@ -65,6 +65,14 @@ namespace Ports {
 
     const USB XBOX_DRIVER = USB::USB_0;
 
-    const PWM LEFT_DRIVE_TRAIN = PWM::PWM_0;
-    const PWM RIGHT_DRIVE_TRAIN = PWM::PWM_1;
+    const CAN LEFT_FRONT = CAN::CAN_1;
+    const CAN LEFT_BACK = CAN::CAN_2;
+    const CAN RIGHT_FRONT = CAN::CAN_3;
+    const CAN RIGHT_BACK = CAN::CAN_4;
+    const CAN SHOOTER = CAN::CAN_9;
+    
+    const PWM ELEVATOR = PWM::PWM_2;
+    const PWM TRANSFER = PWM::PWM_3;
+    const PWM INTAKE = PWM::PWM_4;
+
 }
