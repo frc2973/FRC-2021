@@ -30,11 +30,15 @@ class Robot : public frc::TimedRobot {
   CANSparkMax right_front;
   CANSparkMax right_back;
   CANSparkMax shooter;
-  CANEncoder encoder = left_front.GetEncoder();
+  CANEncoder l_encoder = left_front.GetEncoder();
+  CANEncoder r_encoder = right_front.GetEncoder();
   VictorSP elevator;
   VictorSP transfer;
   VictorSP intake;
   void TankDrive(float left_value, float right_value);
+  void travel(float speed, float value);
+  void left(float speed, float value);
+  void right(float speed, float value);
   void RobotInit() override;
   void RobotPeriodic() override;
   void AutonomousInit() override;
