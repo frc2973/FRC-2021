@@ -35,6 +35,7 @@ class Robot : public frc::TimedRobot {
   VictorSP elevator;
   VictorSP transfer;
   VictorSP intake;
+  SendableChooser<std::string> paths;
   void TankDrive(float left_value, float right_value);
   void travel(float speed, float value);
   void left(float speed, float value);

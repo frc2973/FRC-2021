@@ -17,6 +17,10 @@ void Robot::RobotInit() {
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
+  paths.AddOption("Barrel Racing", "Barrel Racing");
+  paths.AddOption("Slalom", "Slalom");
+  paths.AddOption("Bounce", "Bounce");
+  frc::SmartDashboard::PutData("Path", &paths);
   frc::SmartDashboard::PutNumber("Shooter", 0);
   frc::SmartDashboard::PutNumber("Elevator", 0);
   frc::SmartDashboard::PutNumber("Transfer", 0);
@@ -54,6 +58,17 @@ void Robot::AutonomousInit() {
     // Custom Auto goes here
   } else {
     // Default Auto goes here
+  }
+
+  std::string path = paths.GetSelected();
+  if(path == "Barrel Racing") {
+
+  }
+  else if(path == "Slalom") {
+
+  }
+  else {
+    
   }
 }
 
