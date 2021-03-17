@@ -68,30 +68,29 @@ void Robot::AutonomousPeriodic() {
 void Robot::TeleopInit() {}
 
 void Robot::TeleopPeriodic() {
-  //Drive the robot
-  xbox.setSquareScale(square);
-  if (xbox.GetAButton()) {
-    square = !square;
-  }
-  driveTrain.TankDrive(-xbox.GetRawAxis(1), -xbox.GetRawAxis(5));
+  TankDrive(-xbox.GetLeftDriveTrain(), -xbox.GetRightDriveTrain());
+  shooter.Set(frc::SmartDashboard::GetNumber("Shooter", 0));
+  elevator.Set(frc::SmartDashboard::GetNumber("Elevator", 0));
+  transfer.Set(frc::SmartDashboard::GetNumber("Transfer", 0));
+  intake.Set(frc::SmartDashboard::GetNumber("Intake", 0));
 
   //Activate Limelight tracking
   if (xbox.GetYButton()) {
     while (xbox.GetYButton()) {}
     limelight.set("ledMode", 3); //LED on
     if (limelight.get("tv") == 1) { //If target detected
-      float maxAngle = 29.8;
       while(limelight.get("tx") != 0 && !xbox.GetYButton()) {
-        driveTrain.ArcadeDrive(0, -limelight.get("tx") / maxAngle);
+        if(limelight.get("tx") < 0) {
+          TankDrive(0.1, -0.1);
+        }
+        else if(limelight.get("tx") > 0) {
+          TankDrive(-0.1, 0.1);
+        }
       }
+      TankDrive(0.001, 0.001);
     }
     limelight.set("ledMode", 1); //LED off
   }
-  TankDrive(-xbox.GetLeftDriveTrain(), -xbox.GetRightDriveTrain());
-  shooter.Set(frc::SmartDashboard::GetNumber("Shooter", 0));
-  elevator.Set(frc::SmartDashboard::GetNumber("Elevator", 0));
-  transfer.Set(frc::SmartDashboard::GetNumber("Transfer", 0));
-  intake.Set(frc::SmartDashboard::GetNumber("Intake", 0));
 }
 
 void Robot::TestPeriodic() {}
