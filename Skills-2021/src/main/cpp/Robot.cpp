@@ -81,10 +81,10 @@ void Robot::TeleopPeriodic() {
     if (limelight.get("tv") == 1) { //If target detected
       while(limelight.get("tx") != 0 && !xbox.GetYButton()) {
         if(limelight.get("tx") < 0) {
-          TankDrive(0.1, -0.1);
+          TankDrive(-0.1, 0.1);
         }
         else if(limelight.get("tx") > 0) {
-          TankDrive(-0.1, 0.1);
+          TankDrive(0.1, -0.1);
         }
       }
       TankDrive(0.001, 0.001);
