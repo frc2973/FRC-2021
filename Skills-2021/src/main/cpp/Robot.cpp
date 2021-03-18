@@ -99,6 +99,24 @@ void Robot::TeleopPeriodic() {
         }
       }
       TankDrive(0.001, 0.001);
+      //Shoot balls
+      float area = limelight.get("ta");
+      float shootvalue;
+      if(area <= 0.81) {
+        shootvalue = -0.75;
+      }
+      else if(area <= 2.24) {
+        shootvalue = -0.65;
+      }
+      else {
+        shootvalue = -0.6;
+      }
+      while(!xbox.GetYButton()) {
+        transfer.Set(-0.5);
+        shooter.Set(shootvalue);
+      }
+      transfer.Set(0);
+      shooter.Set(0);
     }
     limelight.set("ledMode", 1); //LED off
   }
