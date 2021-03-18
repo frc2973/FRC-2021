@@ -74,17 +74,28 @@ void Robot::TeleopPeriodic() {
   transfer.Set(frc::SmartDashboard::GetNumber("Transfer", 0));
   intake.Set(frc::SmartDashboard::GetNumber("Intake", 0));
 
+  //Debugging
+  if(xbox.GetAButton()) {
+    limelight.set("ledMode", 3);
+  }
+  if(xbox.GetBButton()) {
+    limelight.set("ledMode", 1);
+  }
+
   //Activate Limelight tracking
   if (xbox.GetYButton()) {
-    while (xbox.GetYButton()) {}
     limelight.set("ledMode", 3); //LED on
+    while (xbox.GetYButton()) {}
     if (limelight.get("tv") == 1) { //If target detected
-      while(limelight.get("tx") != 0 && !xbox.GetYButton()) {
-        if(limelight.get("tx") < 0) {
-          TankDrive(-0.1, 0.1);
+      float uplimit = -6.55;
+      float lowlimit = -6.6;
+      float turnspeed = 0.07;
+      while((limelight.get("tx") > uplimit || limelight.get("tx") < lowlimit) && !xbox.GetYButton()) {
+        if(limelight.get("tx") < lowlimit) {
+          TankDrive(-turnspeed, turnspeed);
         }
-        else if(limelight.get("tx") > 0) {
-          TankDrive(0.1, -0.1);
+        else if(limelight.get("tx") > uplimit) {
+          TankDrive(turnspeed, -turnspeed);
         }
       }
       TankDrive(0.001, 0.001);
