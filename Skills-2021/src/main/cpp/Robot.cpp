@@ -68,7 +68,8 @@ void Robot::AutonomousPeriodic() {
 void Robot::TeleopInit() {}
 
 void Robot::TeleopPeriodic() {
-  TankDrive(-xbox.GetLeftDriveTrain(), -xbox.GetRightDriveTrain());
+  //xbox.setSquareScale(true);
+  TankDrive(-xbox.GetLeftDriveTrain() * 0.3, -xbox.GetRightDriveTrain() * 0.3);
   shooter.Set(frc::SmartDashboard::GetNumber("Shooter", 0));
   elevator.Set(frc::SmartDashboard::GetNumber("Elevator", 0));
   transfer.Set(frc::SmartDashboard::GetNumber("Transfer", 0));
