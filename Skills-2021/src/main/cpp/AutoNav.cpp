@@ -10,13 +10,15 @@ void Robot::TankDrive(float left_value, float right_value) {
 void Robot::travel(float speed, float value) {
     float target = l_encoder.GetPosition() + value;
     while(l_encoder.GetPosition() < target) {
+        frc::SmartDashboard::PutNumber("Encoder", l_encoder.GetPosition());
         TankDrive(speed, speed);
     }
 }
 
 void Robot::left(float speed, float value) {
-    float target = r_encoder.GetPosition() + value;
-    while(r_encoder.GetPosition() < target) {
+    float target = l_encoder.GetPosition() - value;
+    while(l_encoder.GetPosition() > target) {
+        frc::SmartDashboard::PutNumber("Encoder", l_encoder.GetPosition());
         TankDrive(-speed, speed);
     }
 }
@@ -24,6 +26,14 @@ void Robot::left(float speed, float value) {
 void Robot::right(float speed, float value) {
     float target = l_encoder.GetPosition() + value;
     while(l_encoder.GetPosition() < target) {
+        frc::SmartDashboard::PutNumber("Encoder", l_encoder.GetPosition());
         TankDrive(speed, -speed);
+    }
+}
+
+void Robot::circle(float speed) {
+    float target = l_encoder.GetPosition() + 20;
+    while(l_encoder.GetPosition() < target) {
+        TankDrive(speed / 4, speed * 2);
     }
 }

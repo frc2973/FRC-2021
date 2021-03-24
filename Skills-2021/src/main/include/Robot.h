@@ -31,15 +31,17 @@ class Robot : public frc::TimedRobot {
   CANSparkMax right_back;
   CANSparkMax shooter;
   CANEncoder l_encoder = left_front.GetEncoder();
-  CANEncoder r_encoder = right_front.GetEncoder();
+  CANEncoder r_encoder = right_back.GetEncoder();
   VictorSP elevator;
   VictorSP transfer;
   VictorSP intake;
   SendableChooser<std::string> paths;
+  bool enabled;
   void TankDrive(float left_value, float right_value);
   void travel(float speed, float value);
   void left(float speed, float value);
   void right(float speed, float value);
+  void circle(float speed);
   void RobotInit() override;
   void RobotPeriodic() override;
   void AutonomousInit() override;

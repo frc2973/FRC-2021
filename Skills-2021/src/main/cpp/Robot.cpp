@@ -18,7 +18,7 @@ void Robot::RobotInit() {
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
   paths.AddOption("Barrel Racing", "Barrel Racing");
-  paths.AddOption("Slalom", "Slalom");
+  paths.SetDefaultOption("Slalom", "Slalom");
   paths.AddOption("Bounce", "Bounce");
   frc::SmartDashboard::PutData("Path", &paths);
   frc::SmartDashboard::PutNumber("Shooter", 0);
@@ -60,16 +60,7 @@ void Robot::AutonomousInit() {
     // Default Auto goes here
   }
 
-  std::string path = paths.GetSelected();
-  if(path == "Barrel Racing") {
-
-  }
-  else if(path == "Slalom") {
-
-  }
-  else {
-    
-  }
+  enabled = true;
 }
 
 void Robot::AutonomousPeriodic() {
@@ -78,6 +69,23 @@ void Robot::AutonomousPeriodic() {
   } else {
     // Default Auto goes here
   }
+
+  float speed = 0.2;
+  if(enabled) {
+    travel(speed, 8);
+    left(0.15, 1.2);
+    travel(speed, 14);
+    right(0.15, 6.1);
+    travel(speed, 49.2);
+    right(0.15, 7.5);
+    travel(speed, 6);
+    circle(speed);
+    travel(speed, 12);
+    right(0.15, 6.1);
+    travel(speed, 6);
+    enabled = false;
+  }
+  TankDrive(0.001, 0.001);
 }
 
 void Robot::TeleopInit() {}
