@@ -72,17 +72,20 @@ void Robot::AutonomousPeriodic() {
 
   float speed = 0.2;
   if(enabled) {
-    travel(speed, 8);
-    left(0.15, 1.2);
-    travel(speed, 14);
-    right(0.15, 6.1);
-    travel(speed, 49.2);
-    right(0.15, 7.5);
-    travel(speed, 6);
-    circle(speed);
+    travel(0.3, 50);
+    /*travel(speed, 8);
+    left(0.15, 4);
+    travel(speed, 18);
+    right(0.12, 4);
+    travel(0.3, 49.2);
+    right(0.15, 4.5);
+    travel(speed, 7);
+    l_circle(speed, 24);
     travel(speed, 12);
     right(0.15, 6.1);
-    travel(speed, 6);
+    travel(0.3, 40);
+    right(0.15, 6.1);
+    travel(speed, 25);*/
     enabled = false;
   }
   TankDrive(0.001, 0.001);

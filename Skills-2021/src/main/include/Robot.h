@@ -41,7 +41,8 @@ class Robot : public frc::TimedRobot {
   void travel(float speed, float value);
   void left(float speed, float value);
   void right(float speed, float value);
-  void circle(float speed);
+  void l_circle(float speed, float value);
+  void r_circle(float speed, float value);
   void RobotInit() override;
   void RobotPeriodic() override;
   void AutonomousInit() override;
