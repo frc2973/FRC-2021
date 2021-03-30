@@ -31,11 +31,11 @@ class Robot : public frc::TimedRobot {
   CANSparkMax right_front;
   CANSparkMax right_back;
   CANSparkMax shooter;
-  CANEncoder encoder = left_front.GetEncoder();
   VictorSP elevator;
   VictorSP transfer;
   VictorSP intake;
   Limelight limelight;
+  Timer timer;
   void TankDrive(float left_value, float right_value);
   void RobotInit() override;
   void RobotPeriodic() override;
@@ -54,7 +54,8 @@ class Robot : public frc::TimedRobot {
   elevator(Ports::ELEVATOR),
   transfer(Ports::TRANSFER),
   intake(Ports::INTAKE),
-  limelight() {
+  limelight(),
+  timer() {
   }
  private:
   frc::SendableChooser<std::string> m_chooser;
