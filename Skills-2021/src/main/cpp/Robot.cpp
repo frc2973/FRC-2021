@@ -68,22 +68,22 @@ void Robot::TeleopPeriodic() {
   transfer.Set(0.001);
 
   //Debugging
-  if(xbox.GetAButton()) {
+  if(xbox.GetXButton()) {
     limelight.set("ledMode", 3);
   }
-  if(xbox.GetBButton()) {
+  if(xbox.GetYButton()) {
     limelight.set("ledMode", 1);
   }
 
   //Activate Limelight tracking
-  if (xbox.GetYButton()) {
+  if (xbox.GetAutoShootPressed()) {
     limelight.set("ledMode", 3); //LED on
-    while (xbox.GetYButton()) {}
+    while (xbox.GetAutoShootPressed()) {}
     if (limelight.get("tv") == 1) { //If target detected
       float uplimit = -6.55;
       float lowlimit = -6.6;
       float turnspeed = 0.1;
-      while((limelight.get("tx") > uplimit || limelight.get("tx") < lowlimit) && !xbox.GetYButton()) {
+      while((limelight.get("tx") > uplimit || limelight.get("tx") < lowlimit) && !xbox.GetAutoShootPressed()) {
         if(limelight.get("tx") < lowlimit) {
           TankDrive(-turnspeed, turnspeed);
         }
@@ -91,7 +91,7 @@ void Robot::TeleopPeriodic() {
           TankDrive(turnspeed, -turnspeed);
         }
       }
-      while(xbox.GetYButton()) {}
+      while(xbox.GetAutoShootPressed()) {}
       TankDrive(0.001, 0.001);
       limelight.set("ledMode", 1); //LED off
       //Shoot balls
@@ -110,10 +110,10 @@ void Robot::TeleopPeriodic() {
       while(timer.HasPeriodPassed(0.5)) {
         transfer.Set(-0.5);
       }
-      while(!xbox.GetYButton()) {
+      while(!xbox.GetAutoShootPressed()) {
         shooter.Set(shootvalue);
       }
-      while(xbox.GetYButton()) {}
+      while(xbox.GetAutoShootPressed()) {}
       transfer.Set(0.001);
       shooter.Set(0);
     }
