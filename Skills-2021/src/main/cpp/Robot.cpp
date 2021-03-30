@@ -16,15 +16,6 @@ void Robot::RobotInit() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
-
-  paths.AddOption("Barrel Racing", "Barrel Racing");
-  paths.SetDefaultOption("Slalom", "Slalom");
-  paths.AddOption("Bounce", "Bounce");
-  frc::SmartDashboard::PutData("Path", &paths);
-  frc::SmartDashboard::PutNumber("Shooter", 0);
-  frc::SmartDashboard::PutNumber("Elevator", 0);
-  frc::SmartDashboard::PutNumber("Transfer", 0);
-  frc::SmartDashboard::PutNumber("Intake", 0);
 }
 
 /**
@@ -72,20 +63,7 @@ void Robot::AutonomousPeriodic() {
 
   float speed = 0.2;
   if(enabled) {
-    travel(0.3, 50);
-    /*travel(speed, 8);
-    left(0.15, 4);
-    travel(speed, 18);
-    right(0.12, 4);
-    travel(0.3, 49.2);
-    right(0.15, 4.5);
-    travel(speed, 7);
-    l_circle(speed, 24);
-    travel(speed, 12);
-    right(0.15, 6.1);
-    travel(0.3, 40);
-    right(0.15, 6.1);
-    travel(speed, 25);*/
+    
     enabled = false;
   }
   TankDrive(0.001, 0.001);
@@ -95,10 +73,6 @@ void Robot::TeleopInit() {}
 
 void Robot::TeleopPeriodic() {
   TankDrive(-xbox.GetLeftDriveTrain(), -xbox.GetRightDriveTrain());
-  shooter.Set(frc::SmartDashboard::GetNumber("Shooter", 0));
-  elevator.Set(frc::SmartDashboard::GetNumber("Elevator", 0));
-  transfer.Set(frc::SmartDashboard::GetNumber("Transfer", 0));
-  intake.Set(frc::SmartDashboard::GetNumber("Intake", 0));
 }
 
 void Robot::TestPeriodic() {}
