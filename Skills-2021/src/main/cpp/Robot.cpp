@@ -70,10 +70,21 @@ void Robot::TeleopInit() {}
 void Robot::TeleopPeriodic() {
   //xbox.setSquareScale(true);
   TankDrive(-xbox.GetLeftDriveTrain() * 0.3, -xbox.GetRightDriveTrain() * 0.3);
-  shooter.Set(frc::SmartDashboard::GetNumber("Shooter", 0));
-  elevator.Set(frc::SmartDashboard::GetNumber("Elevator", 0));
+  //shooter.Set(frc::SmartDashboard::GetNumber("Shooter", 0));
+  shooter.Set(0);
+  elevator.Set(0);
+  transfer.Set(0);
+  while(xbox.GetRawAxis(3) > 0.5) {
+  shooter.Set(-0.75);
+  
+  if(xbox.GetRawAxis(2) > 0.5) {
+    
+  elevator.Set(-0.5);
+  transfer.Set(-0.25);
+  }}
+  /*elevator.Set(frc::SmartDashboard::GetNumber("Elevator", 0));
   transfer.Set(frc::SmartDashboard::GetNumber("Transfer", 0));
-  intake.Set(frc::SmartDashboard::GetNumber("Intake", 0));
+  intake.Set(frc::SmartDashboard::GetNumber("Intake", 0));*/
 
   //Debugging
   if(xbox.GetAButton()) {
@@ -90,7 +101,7 @@ void Robot::TeleopPeriodic() {
     if (limelight.get("tv") == 1) { //If target detected
       float uplimit = -6.55;
       float lowlimit = -6.6;
-      float turnspeed = 0.07;
+      float turnspeed = 0.13;
       while((limelight.get("tx") > uplimit || limelight.get("tx") < lowlimit) && !xbox.GetYButton()) {
         if(limelight.get("tx") < lowlimit) {
           TankDrive(-turnspeed, turnspeed);
@@ -99,9 +110,10 @@ void Robot::TeleopPeriodic() {
           TankDrive(turnspeed, -turnspeed);
         }
       }
+      while(xbox.GetYButton()) {}
       TankDrive(0.001, 0.001);
       //Shoot balls
-      float area = limelight.get("ta");
+      /*float area = limelight.get("ta");
       float shootvalue;
       if(area <= 0.81) {
         shootvalue = -0.75;
@@ -117,7 +129,7 @@ void Robot::TeleopPeriodic() {
         shooter.Set(shootvalue);
       }
       transfer.Set(0);
-      shooter.Set(0);
+      shooter.Set(0);*/
     }
     limelight.set("ledMode", 1); //LED off
   }
